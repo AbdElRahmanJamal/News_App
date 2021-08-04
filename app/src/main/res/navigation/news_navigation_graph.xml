@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/breakingNewsFragment">
+    <fragment
+        android:id="@+id/breakingNewsFragment"
+        android:name="com.app.newsapp.presentation.breaking_news.view.BreakingNewsFragment"
+        android:label="BreakingNewsFragment">
+        <action
+            android:id="@+id/action_breakingNewsFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouritesNewsFragment"
+        android:name="com.app.newsapp.presentation.favourites_news.FavouritesNewsFragment"
+        android:label="FavouritesNewsFragment">
+        <action
+            android:id="@+id/action_favouritesNewsFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        android:name="com.app.newsapp.presentation.news_details.NewsDetailsFragment"
+        android:label="NewsDetailsFragment" />
+    <fragment
+        android:id="@+id/searchForNewsFragment"
+        android:name="com.app.newsapp.presentation.search_for_news.SearchForNewsFragment"
+        android:label="SearchForNewsFragment">
+        <action
+            android:id="@+id/action_searchForNewsFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+</navigation>
