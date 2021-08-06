@@ -1,4 +1,4 @@
-package com.app.newsapp.presentation.breaking_news.view
+package com.app.newsapp.presentation.breaking_news
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

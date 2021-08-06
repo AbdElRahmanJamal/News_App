@@ -5,7 +5,7 @@
     app:startDestination="@id/breakingNewsFragment">
     <fragment
         android:id="@+id/breakingNewsFragment"
-        android:name="com.app.newsapp.presentation.breaking_news.view.BreakingNewsFragment"
+        android:name="com.app.newsapp.presentation.breaking_news.BreakingNewsFragment"
         android:label="BreakingNewsFragment">
         <action
             android:id="@+id/action_breakingNewsFragment_to_newsDetailsFragment"
