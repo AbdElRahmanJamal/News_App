@@ -13,34 +13,34 @@ import com.app.newsapp.framework.remote_data_source.breaking_news_remote_source.
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineDispatcher
 import retrofit2.Retrofit
-import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 object BreakingNewsModule {
 
     @Provides
-    @Singleton
+    @ViewModelScoped
     fun providesNetworkHandlerForBreakingNewsRemoteDataSource(ioDispatcher: CoroutineDispatcher)
             : NetworkHandler<NewsResponseModel> = NetworkHandler(ioDispatcher)
 
     @Provides
-    @Singleton
+    @ViewModelScoped
     fun providesBreakingNewsApi(retrofit: Retrofit): BreakingNewsApi =
         retrofit.create(BreakingNewsApi::class.java)
 
     @DIQualifier.QualifierEntityDomainMapper
     @Provides
-    @Singleton
+    @ViewModelScoped
     fun providesDomainEntityMapper(): EntityMapper<Article, BreakingNewsDomainModel> =
         EntityDomainMapper()
 
     @DIQualifier.QualifierBreakingNewsRemoteDataSource
     @Provides
-    @Singleton
+    @ViewModelScoped
     fun providesBreakingNewsRemoteDataSource(
         networkHandler: NetworkHandler<NewsResponseModel>,
         breakingNewsApi: BreakingNewsApi,
