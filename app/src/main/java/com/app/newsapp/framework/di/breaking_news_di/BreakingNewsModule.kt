@@ -7,6 +7,8 @@ import com.app.core.data.breaking_news_data_source.entity.NewsResponseModel
 import com.app.core.domain.entities.breaking_news_entity.BreakingNewsDomainModel
 import com.app.core.domain.mapper.breaking_news_entity_mapper.EntityDomainMapper
 import com.app.core.domain.util.DIQualifier
+import com.app.core.domain.util.DispatcherProvider
+import com.app.core.domain.util.StandardDispatcher
 import com.app.newsapp.framework.remote_data_source.NetworkHandler
 import com.app.newsapp.framework.remote_data_source.breaking_news_remote_source.BreakingNewsApi
 import com.app.newsapp.framework.remote_data_source.breaking_news_remote_source.BreakingNewsRemoteDataSource
@@ -21,6 +23,10 @@ import retrofit2.Retrofit
 @Module
 @InstallIn(ViewModelComponent::class)
 object BreakingNewsModule {
+
+    @Provides
+    @ViewModelScoped
+    fun providesStandardDispatcher(): DispatcherProvider = StandardDispatcher()
 
     @Provides
     @ViewModelScoped

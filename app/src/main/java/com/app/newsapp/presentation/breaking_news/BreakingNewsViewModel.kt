@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.app.core.domain.entities.breaking_news_entity.BreakingNewsDomainModelList
 import com.app.core.domain.interactors.breaking_news_interactors.GetBreakingNewsByCountryAndPageNumberUseCase
 import com.app.core.domain.util.APIState
+import com.app.core.domain.util.DispatcherProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -16,22 +16,22 @@ import javax.inject.Inject
 @HiltViewModel
 class BreakingNewsViewModel
 @Inject constructor(
-    private val getBreakingNewsByCountryAndPageNumber: GetBreakingNewsByCountryAndPageNumberUseCase
+    private val getBreakingNewsByCountryAndPageNumber: GetBreakingNewsByCountryAndPageNumberUseCase,
+    private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
 
-    private val aPIState = MutableLiveData<APIState<BreakingNewsDomainModelList>>()
-    var _aPIState = MutableLiveData<APIState<BreakingNewsDomainModelList>>()
+    private val _aPIState = MutableLiveData<APIState<BreakingNewsDomainModelList>>()
+    var aPIState = MutableLiveData<APIState<BreakingNewsDomainModelList>>()
 
-    fun getBreakingNewsByCountryAndPageNumber(countryCode: String, pageNumber: Int) {
-        _aPIState = aPIState
-        viewModelScope.launch(Dispatchers.IO) {
+    suspend fun getBreakingNewsByCountryAndPageNumber(countryCode: String, pageNumber: Int) {
+        aPIState = _aPIState
+        viewModelScope.launch(dispatcherProvider.io) {
             getBreakingNewsByCountryAndPageNumber.getBreakingNewsByCountryAndPageNumber(
                 countryCode,
                 pageNumber
-            )
-                .collect { flowState ->
-                    aPIState.postValue(flowState)
-                }
+            ).collect { flowState ->
+                aPIState.postValue(flowState)
+            }
         }
     }
 

@@ -31,10 +31,9 @@ class BreakingNewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        breakingNewsViewModel.getBreakingNewsByCountryAndPageNumber("eg", 1)
-
         lifecycleScope.launchWhenCreated {
-            breakingNewsViewModel._aPIState.observe(viewLifecycleOwner) {
+            breakingNewsViewModel.getBreakingNewsByCountryAndPageNumber("eg", 1)
+            breakingNewsViewModel.aPIState.observe(viewLifecycleOwner) {
                 when (it) {
                     is APIState.LoadingState -> {
                         fragmentBreakingNewsBinding.loadingLottie.visibility = View.VISIBLE
