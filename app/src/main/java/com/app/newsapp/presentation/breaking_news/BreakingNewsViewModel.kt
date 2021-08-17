@@ -1,5 +1,6 @@
 package com.app.newsapp.presentation.breaking_news
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,16 +22,15 @@ class BreakingNewsViewModel
 ) : ViewModel() {
 
     private val _aPIState = MutableLiveData<APIState<BreakingNewsDomainModelList>>()
-    var aPIState = MutableLiveData<APIState<BreakingNewsDomainModelList>>()
+    var aPIState: LiveData<APIState<BreakingNewsDomainModelList>> = _aPIState
 
     suspend fun getBreakingNewsByCountryAndPageNumber(countryCode: String, pageNumber: Int) {
-        aPIState = _aPIState
         viewModelScope.launch(dispatcherProvider.io) {
             getBreakingNewsByCountryAndPageNumber.getBreakingNewsByCountryAndPageNumber(
                 countryCode,
                 pageNumber
             ).collect { flowState ->
-                aPIState.postValue(flowState)
+                _aPIState.postValue(flowState)
             }
         }
     }
